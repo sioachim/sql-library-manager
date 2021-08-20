@@ -1,0 +1,30 @@
+{
+    "name": "sql-library-manager",
+    "version": "1.0.0",
+    "description": "Web application for listing, adding, updating, and deleting books in a library application, using JavaScript, Node.js, Express, Pug, and the SQL ORM Sequelize",
+    "main": "index.js",
+    "private": true,
+    "dependencies": {
+        "sequelize": "^6.6.5",
+        "sequelize-cli": "^6.2.0",
+        "sqlite3": "^5.0.2",
+        "express": "^4.17.1",
+        "pug": "^3.0.1"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sioachim/sql-library-manager.git"
+    },
+    "author": "Stefan Ioachim",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/sioachim/sql-library-manager/issues"
+    },
+    "homepage": "https://github.com/sioachim/sql-library-manager#readme",
+    "volta": {
+        "node": "14.17.5"
+    }
+}
