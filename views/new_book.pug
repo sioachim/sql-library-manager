@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html>
+extends layout
 
-<head>
-    <title>New Book</title>
-    <link rel="stylesheet" href="../public/stylesheets/style.css">
-</head>
-
-<body>
-    <h1>New Book</h1>
+block content
+    h1= title
     <form>
         <p>
             <label for="title">Title</label>
@@ -29,9 +23,6 @@
             <input type="submit" value="Create New Book">
         </p>
         <p>
-            <a class="button" href="all_books.html">Cancel</a>
+            <a class="button" href="/books">Cancel</a>
         </p>
     </form>
-</body>
-
-</html>
