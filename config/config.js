@@ -1,23 +1,20 @@
+'use strict';
+
+const path = require('path');
+
 module.exports = {
     development: {
-        username: "dev",
-        password: "dev",
-        database: "database_development",
-        path: "../library.db",
-        dialect: "sqlite"
+        dialect: 'sqlite',
+        storage: path.join(__dirname, '..', 'library.db')
     },
-    "test": {
-        "username": process.env.DB_USERNAME,
-        "password": process.env.DB_PASSWORD,
-        "database": "database_test",
-        "path": "../library.db",
-        "dialect": "sqlite"
+
+    test: {
+        dialect: 'sqlite',
+        storage: ':memory'
     },
-    "production": {
-        "username": process.env.DB_USERNAME,
-        "password": process.env.DB_PASSWORD,
-        "database": "database_production",
-        "path": "../library.db",
-        "dialect": "sqlite"
+
+    production: {
+        dialect: 'sqlite',
+        storage: path.join(__dirname, '..', 'library.db')
     }
 };

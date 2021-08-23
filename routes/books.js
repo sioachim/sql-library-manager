@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-// Require controller modules.
+// Require books controller
 var bookController = require('../controllers/bookController');
 
 /* GET books listing. */
