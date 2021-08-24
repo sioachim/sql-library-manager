@@ -1,0 +1,10 @@
+ul(class="pagination")
+    if pagination.prev
+        li
+            a(href=`?search=${search}&page=${parseInt(pagination.current) - 1}`) Previous
+    each page in pagination.pages
+        li
+            a(href=`?search=${search}&page=${page + 1}` class=`${page + 1 == pagination.current ? 'active' : ''}`)= page + 1
+    if pagination.next
+        li
+            a(href=`?search=${search}&page=${parseInt(pagination.current) + 1}`) Next

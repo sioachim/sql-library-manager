@@ -2,24 +2,41 @@
 
 const { Book } = require('../models');
 const { Op } = require('sequelize');
+const Helpers = require('../helpers');
 
 /* Displays a list of all books */
 module.exports.index = async function(req, res, next) {
-    let search = req.query.search;
+    let search = req.query.search || '';
+    let current = req.query.page || 1;
+    let limit = Helpers.limit;
 
-    let where = search
+    let sql = search
         ? {
             where: {
-              title: {
-                [Op.substring]: search,
-              }
-            }
-          }
-        : {};
+                title: {
+                    [Op.substring]: search,
+                }
+            },
+            offset: current * limit,
+            limit: limit
+        }
+        : {
+            offset: current * limit,
+            limit: limit
+        };
 
-    let books = await Book.findAll(where);
+    let result = await Book.findAndCountAll(sql);
 
-    res.render('books/index', { title: 'Books', books: books, message: req.flash('message'), search: search });
+    res.render(
+        'books/index',
+        {
+            title: 'Books',
+            books: result.rows,
+            message: req.flash('message'),
+            search: search,
+            pagination: Helpers.pagination(current, result.count)
+        }
+    );
 };
 
 
