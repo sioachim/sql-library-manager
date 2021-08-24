@@ -44,9 +44,17 @@ app.use(function(err, req, res, next) {
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
+    let status = err.status || 500;
+
+    res.status(status);
+
+    if (status === 404) {
+        res.render('page-not-found', {title : 'Page Not Found', message: 'Sorry! We couldn\'t find the page you were looking for.'});
+    } else if (status === 500) {
+        res.render('error', {title : 'Server error', message: 'Sorry! There was an unexpected error on the server.'});
+    } else  {
+        res.render('error', {title : 'Server error', message: status});
+    }
 });
 
 module.exports = app;
