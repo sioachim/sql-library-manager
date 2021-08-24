@@ -20,19 +20,33 @@ module.exports = (sequelize, DataTypes) => {
         title: {
             type: DataTypes.STRING,
             validate: {
-                notNull: true
+                notEmpty: {
+                    args: true,
+                    msg: 'Title is required'
+                }
             },
             allowNull: false
         },
         author: {
             type: DataTypes.STRING,
+            allowNull: false,
             validate: {
-                notNull: true
-            },
-            allowNull: false
+                notEmpty: {
+                    args: true,
+                    msg: 'Author is required'
+                }
+            }
         },
         genre: DataTypes.STRING,
-        year: DataTypes.INTEGER
+        year: {
+            type: DataTypes.INTEGER,
+            validate: {
+                isInt: {
+                    args: true,
+                    msg: 'The year is not having the correct format'
+                }
+            }
+        }
     }, {
         sequelize,
         modelName: 'Book',

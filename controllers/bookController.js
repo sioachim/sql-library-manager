@@ -21,26 +21,21 @@ module.exports.new = function (req, res, next) {
 
 /* Creates the new book record */
 module.exports.create = async function (req, res, next) {
-    let errors = validationResult(req);
-
     let book = Book.build(req.body);
 
-    // display the form again with error messages
-    if (!errors.isEmpty()) {
-        res.render('books/new', { title: 'New Book', book: book, errors: errors.array() });
-        return;
-    }
-
-    let result = await book.save();
-
-    if (!result) {
-        errors.push('Something went wrong when saving the record, please contact the administrator !');
-        res.render('books/new', { title: 'New Book', book: book, errors: errors });
-        return;
-    }
-
-    req.flash('message', 'Your book was successfully created!');
-    res.redirect('/books');
+    await book.save().then(function (result) {
+        req.flash('message', 'Your book was successfully created!');
+        res.redirect('/books');
+    }).catch(function (result) {
+        res.render(
+            'books/new',
+            {
+                title: 'New Book',
+                book: book,
+                errors: result.errors.map(error => error.message)
+            }
+        );
+    });
 };
 
 
@@ -56,27 +51,30 @@ module.exports.edit = async function (req, res, next) {
 
 /* Updates the book record */
 module.exports.update = async function (req, res, next) {
-    let errors = validationResult(req);
     let id = req.params.id;
 
     let book = await Book.findByPk(id);
 
     // display the form again with error messages
-    if (!errors.isEmpty()) {
-        res.render('books/edit', { title: 'Update Book', book: book, errors: errors.array() });
+    if (!book) {
+        req.flash('message', `Book with id ${id} was not found!`);
+        res.redirect('/books');
         return;
     }
 
-    let result = await book.update(req.body);
-
-    if (!result) {
-        errors.push('Something went wrong when updating the record, please contact the administrator !');
-        res.render('books/edit', { title: 'Update Book', book: book, errors: errors.array() });
-        return;
-    }
-
-    req.flash('message', 'Your book was successfully updated!');
-    res.redirect('/books');
+    await book.update(req.body).then(function (result) {
+        req.flash('message', 'Your book was successfully updated!');
+        res.redirect('/books');
+    }).catch(function (result) {
+        res.render(
+            'books/edit',
+            {
+                title: 'Update Book',
+                book: book,
+                errors: result.errors.map(error => error.message)
+            }
+        );
+    });
 };
 
 
