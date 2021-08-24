@@ -1,7 +1,6 @@
 'use strict';
 
 const {Book} = require('../models');
-const { validationResult } = require('express-validator');
 
 /* Displays a list of all books */
 module.exports.index = async function(req, res, next) {
