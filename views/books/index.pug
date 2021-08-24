@@ -4,8 +4,12 @@ block content
     h1= title
     if message
         h2= message
+
+    include search.pug
+
     p
         a(class="button" href="/books/new") Create New Book
+
     table
         thead
             tr

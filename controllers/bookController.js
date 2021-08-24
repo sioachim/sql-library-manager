@@ -1,12 +1,25 @@
 'use strict';
 
-const {Book} = require('../models');
+const { Book } = require('../models');
+const { Op } = require('sequelize');
 
 /* Displays a list of all books */
 module.exports.index = async function(req, res, next) {
-    let books = await Book.findAll();
+    let search = req.query.search;
 
-    res.render('books/index', { title: 'Books', books: books, message: req.flash('message') });
+    let where = search
+        ? {
+            where: {
+              title: {
+                [Op.substring]: search,
+              }
+            }
+          }
+        : {};
+
+    let books = await Book.findAll(where);
+
+    res.render('books/index', { title: 'Books', books: books, message: req.flash('message'), search: search });
 };
 
 
