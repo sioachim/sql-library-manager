@@ -103,19 +103,28 @@ input[type=text] {
 ul.pagination {
     display: inline-block;
     padding: 0;
-    margin: 0;
+    margin: 10px 0;
 }
 
 ul.pagination li {
     display: inline;
 }
 
-ul.pagination li a {
+ul.pagination li a, ul.pagination li span {
     float: left;
     padding: 8px 16px;
     text-decoration: none;
+    font-weight: bold;
+}
+
+ul.pagination li span {
+    color: grey;
+}
+
+ul.pagination li a:hover {
+    color: #01b189;
 }
 
 ul.pagination li a.active {
-    color: black;
+    background-color: #01b189;
 }
