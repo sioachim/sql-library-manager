@@ -127,4 +127,5 @@ ul.pagination li a:hover {
 
 ul.pagination li a.active {
     background-color: #01b189;
+    color: white;
 }
