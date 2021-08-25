@@ -1,7 +1,9 @@
 'use strict';
 
 
-function Helper() {}
+function Helper() {
+    // empty
+}
 
 Helper.limit = 5;
 
