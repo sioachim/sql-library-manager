@@ -34,7 +34,7 @@ module.exports.index = async function(req, res, next) {
             books: result.rows,
             message: req.flash('message'),
             search: search,
-            pagination: Helpers.pagination(current, result.count)
+            pagination: Helpers.pagination(req.query, result.count)
         }
     );
 };

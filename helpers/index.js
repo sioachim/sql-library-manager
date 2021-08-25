@@ -5,14 +5,23 @@ function Helper() {}
 
 Helper.limit = 5;
 
-Helper.pagination = function (current, total) {
-    let pages = parseInt(total / this.limit);
+Helper.pagination = function (params, total) {
+    let totalPages = parseInt(total / this.limit);
+    let current = parseInt(params.page) || 1;
+    let search = params.search || '';
+
+    let pages = [...Array(totalPages).keys()].map(page => {
+        return {
+            href: `?search=${search}&page=${page + 1}`,
+            class: page + 1 == current ? 'active' : ''
+        };
+    });
 
     return {
         current: current,
-        pages: [...Array(pages).keys()],
+        pages: pages,
         prev: current > 1,
-        next: current < pages
+        next: current < totalPages
     };
 };
 
