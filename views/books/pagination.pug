@@ -2,7 +2,7 @@ ul(class="pagination")
     li
         if pagination.prev
             a(href=pagination.pages[pagination.current - 2].href) Previous
-        else if pagination.pages.length
+        else if pagination.hasPages
             span Previous
     each page, index in pagination.pages
         li
@@ -10,5 +10,5 @@ ul(class="pagination")
     li
         if pagination.next
             a(href=pagination.pages[pagination.current].href) Next
-        else if pagination.pages.length
+        else if pagination.hasPages
             span Next

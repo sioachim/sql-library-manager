@@ -13,15 +13,34 @@ module.exports.index = async function(req, res, next) {
     let sql = search
         ? {
             where: {
-                title: {
-                    [Op.substring]: search,
-                }
+                [Op.or]: [
+                    {
+                        title: {
+                            [Op.like]: '%' + search + '%'
+                        }
+                    },
+                    {
+                        author: {
+                            [Op.like]: '%' + search + '%'
+                        }
+                    },
+                    {
+                        genre: {
+                            [Op.like]: '%' + search + '%'
+                        }
+                    },
+                    {
+                        year: {
+                            [Op.like]: '%' + search + '%'
+                        }
+                    }
+                ]
             },
-            offset: current * limit,
+            offset: (current - 1) * limit,
             limit: limit
         }
         : {
-            offset: current * limit,
+            offset: (current - 1) * limit,
             limit: limit
         };
 

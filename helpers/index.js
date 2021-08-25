@@ -21,7 +21,8 @@ Helper.pagination = function (params, total) {
         current: current,
         pages: pages,
         prev: current > 1,
-        next: current < totalPages
+        next: current < totalPages,
+        hasPages: totalPages > 0
     };
 };
 
