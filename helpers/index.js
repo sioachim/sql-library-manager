@@ -6,7 +6,7 @@ function Helper() {}
 Helper.limit = 5;
 
 Helper.pagination = function (params, total) {
-    let totalPages = parseInt(total / this.limit);
+    let totalPages = Math.ceil(total / this.limit);
     let current = parseInt(params.page) || 1;
     let search = params.search || '';
 
