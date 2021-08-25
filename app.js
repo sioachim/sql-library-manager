@@ -51,6 +51,7 @@ app.use(function(err, req, res, next) {
     if (status === 404) {
         res.render('page-not-found', {title : 'Page Not Found', message: 'Sorry! We couldn\'t find the page you were looking for.'});
     } else if (status === 500) {
+        console.log('\n\x1b[4;31;40m' + err.stack + '\x1b[0m\n');
         res.render('error', {title : 'Server error', message: 'Sorry! There was an unexpected error on the server.'});
     } else  {
         res.render('error', {title : 'Server error', message: status});
